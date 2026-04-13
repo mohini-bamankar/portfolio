@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Project Details</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- 🔙 BACK BUTTON -->
+    <a href="/" class="btn">⬅ Back to Home</a>
+
+    <div class="card">
+
+        <h1 th:text="${project.name}"></h1>
+
+        <p style="white-space: pre-line;"
+           th:text="${project.details}">
+        </p>
+
+        <a th:href="${project.github}" target="_blank" class="btn">
+            🔗 View on GitHub
+        </a>
+
+    </div>
+
+</div>
+
+</body>
+</html>

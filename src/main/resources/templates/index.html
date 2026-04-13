@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohini Portfolio</title>
+    <link rel="stylesheet" th:href="@{/style.css}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-container">
+        <a class="nav-link active" onclick="openTab(event, 'home')">🏠 Home</a>
+        <a class="nav-link" onclick="openTab(event, 'projects')">💻 Projects</a>
+        <a class="nav-link" onclick="openTab(event, 'experience')">💼 Experience</a>
+        <a class="nav-link" onclick="openTab(event, 'education')">🎓 Education</a>
+        <a class="nav-link" onclick="openTab(event, 'skills')">🧠 Skills</a>
+        <a class="nav-link" onclick="openTab(event, 'certificates')">🏆 Certificates</a>
+        <a class="nav-link" onclick="openTab(event, 'contact')">📞 Contact</a>
+    </div>
+</nav>
+
+<main class="container">
+    <div id="home" class="tab-content active home-center">
+        <div class="hero">
+
+            <div class="profile-container">
+                <img th:src="@{/Photo1.jpeg}" class="profile" alt="Mohini Bamankar">
+            </div>
+
+            <h1 class="glow-title" th:text="${name}">Mohini Bamankar</h1>
+
+            <p class="role"><span id="typing"></span><span class="cursor">|</span></p>
+
+            <div class="hero-btns">
+                <a th:href="@{/Mohini Bamankar (Software Engineer).pdf}" class="btn primary-btn" download>
+                    <i class="fa-solid fa-file-arrow-down"></i> 📄 Download Resume
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="projects" class="tab-content">
+        <h2 class="section-border">Projects</h2>
+        <div th:each="project : ${projects}" class="card glow-card">
+            <h3 class="highlight-text" th:text="${project.title}">Project Title</h3>
+            <p th:text="${project.summary}">Summary</p>
+            <div class="project-buttons">
+                <a th:href="@{'/project/' + ${project.id}}" class="btn small-btn">Details</a>
+                <a th:href="${project.githubLink}" class="btn github-btn small-btn">GitHub</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="experience" class="tab-content">
+        <h2 class="section-border">Work Experience</h2>
+        <div th:each="e : ${experienceList}" class="card glow-card">
+            <h3 class="highlight-text">
+                <span th:text="${e.position}"></span> @ <span th:text="${e.company}"></span>
+            </h3>
+            <p class="date-badge" th:text="${e.duration}"></p>
+            <p th:text="${e.description}"></p>
+        </div>
+    </div>
+
+    <div id="education" class="tab-content">
+        <h2 class="section-border">Education</h2>
+        <div th:each="e : ${educationList}" class="card glow-card">
+            <h3 class="highlight-text" th:text="${e.degree}"></h3>
+            <p th:text="${e.college}"></p>
+            <p>Year: <span th:text="${e.year}"></span> | Score: <span th:text="${e.percentage}"></span></p>
+        </div>
+    </div>
+
+    <div id="skills" class="tab-content">
+        <h2 class="section-border">Skills</h2>
+
+        <div class="card glow-card skill-section">
+            <h3 class="skill-category-title">Backend</h3>
+            <div class="pill-container">
+                <span class="pill">Java</span>
+                <span class="pill">SpringBoot</span>
+                <span class="pill">MySQL</span>
+            </div>
+        </div>
+
+        <div class="card glow-card skill-section">
+            <h3 class="skill-category-title">Frontend</h3>
+            <div class="pill-container">
+                <span class="pill">Angular</span>
+                <span class="pill">HTML</span>
+                <span class="pill">CSS</span>
+                <span class="pill">Bootstrap</span>
+                <span class="pill">JavaScript</span>
+            </div>
+        </div>
+
+        <div class="card glow-card skill-section">
+            <h3 class="skill-category-title">AI/ML</h3>
+            <div class="pill-container">
+                <span class="pill">Python</span>
+                <span class="pill">TensorFlow</span>
+                <span class="pill">OpenCV</span>
+                <span class="pill">Scikit-learn</span>
+                <span class="pill">NumPy</span>
+                <span class="pill">Pandas</span>
+            </div>
+        </div>
+
+        <div class="card glow-card skill-section">
+            <h3 class="skill-category-title">Tools & Platforms</h3>
+            <div class="pill-container">
+                <span class="pill">Git</span>
+                <span class="pill">GitHub</span>
+            </div>
+        </div>
+
+        <div class="card glow-card skill-section">
+            <h3 class="skill-category-title">Other</h3>
+            <div class="pill-container">
+                <span class="pill">OOP</span>
+                <span class="pill">Data Structures</span>
+                <span class="pill">Java Swing</span>
+                <span class="pill">Web Design</span>
+                <span class="pill">GUI</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="certificates" class="tab-content">
+        <h2 class="section-border">Certificates & Achievements</h2>
+
+        <div class="grid-layout">
+            <div th:if="${#lists.isEmpty(certificates)}" class="card">
+                <p>Certificates are being updated. Check back soon!</p>
+            </div>
+
+            <div th:each="c : ${certificates}" class="card glow-card">
+                <h3 class="highlight-text" th:text="${c.name}">Certificate Name</h3>
+                <p class="issuer-text" style="color: #ccc; margin-bottom: 15px;">
+                    Issued by: <span th:text="${c.issuer}" style="color: #fff; font-weight: 600;"></span>
+                </p>
+
+                <a th:href="${c.imagePath}" target="_blank" class="btn small-btn">
+                    📜 View Certificate
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <div id="contact" class="tab-content">
+        <h2 class="section-border">Contact Details</h2>
+        <div class="card glow-card contact-compact">
+            <div class="contact-line">
+                <i class="fa-solid fa-phone highlight-text"></i>
+                <span class="label">Mobile:</span>
+                <span class="value">+91 9309988352</span>
+            </div>
+            <div class="contact-line">
+                <i class="fa-solid fa-envelope highlight-text"></i>
+                <span class="label">Email:</span>
+                <a href="mailto:mohini.bamankar3@gmail.com" class="value highlight-text">mohini.bamankar3@gmail.com</a>
+            </div>
+            <div class="contact-line">
+                <i class="fa-brands fa-github highlight-text"></i>
+                <span class="label">GitHub:</span>
+                <a href="https://github.com/mohini-bamankar" target="_blank" class="value highlight-text">github.com/mohini-bamankar</a>
+            </div>
+            <div class="contact-line">
+                <i class="fa-brands fa-linkedin highlight-text"></i>
+                <span class="label">LinkedIn:</span>
+                <a href="https://www.linkedin.com/in/mohini-bamankar-998510222/" target="_blank" class="value highlight-text">linkedin.com/in/mohini-bamankar</a>
+            </div>
+        </div>
+    </div>
+    </div>
+</main>
+
+<script>
+    function openTab(evt, tabId) {
+        let tabs = document.getElementsByClassName("tab-content");
+        let links = document.getElementsByClassName("nav-link");
+
+        for (let tab of tabs) { tab.classList.remove("active"); }
+        for (let link of links) { link.classList.remove("active"); }
+
+        document.getElementById(tabId).classList.add("active");
+        evt.currentTarget.classList.add("active");
+    }
+
+    const text = "Software Engineer | Java & Python Developer | AI & IoT Enthusiast | Building real-world projects";
+    let i = 0;
+    function typeEffect() {
+        if (i < text.length) {
+            document.getElementById("typing").innerHTML += text.charAt(i);
+            i++;
+            setTimeout(typeEffect, 50);
+        }
+    }
+    window.onload = typeEffect;
+</script>
+</body>
+</html>

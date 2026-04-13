@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Project Details</title>
+  <link rel="stylesheet" th:href="@{/style.css}">
+</head>
+<body>
+
+<div class="card detail-card">
+  <h1 th:text="${project.title}" class="section-title">Project Title</h1>
+
+  <div class="details-box">
+    <p class="project-text"
+       style="white-space: pre-wrap; line-height: 1.8;"
+       th:text="${project.description}">
+      Full description will appear here with proper spacing.
+    </p>
+  </div>
+
+  <div class="project-buttons">
+    <a th:href="${project.githubLink}" class="btn github-btn">View on GitHub</a>
+    <a href="/" class="btn">Back to Home</a>
+  </div>
+</div>
+
+</body>
+</html>

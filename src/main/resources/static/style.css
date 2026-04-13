@@ -1,0 +1,149 @@
+:root {
+    --primary: #00f7ff;
+    --bg-dark: #0b0e14;
+    --card-bg: rgba(255, 255, 255, 0.05);
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-dark);
+    color: #fff;
+    line-height: 1.6;
+}
+
+/* --- HERO & PHOTO SIZE --- */
+.hero { padding: 40px 0; text-align: center; }
+
+/* 🔥 Updated Profile Container (Glow Effect) */
+.profile-container {
+    width: 160px; /* Aligned size */
+    height: 180px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    padding: 5px; /* Creates the border space */
+    background: linear-gradient(45deg,  transparent);
+    box-shadow: 0 0 30px rgba(0, 247, 255, 0.4); /* Neon Cyan Glow */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile {
+
+    width: 100%;
+    height: 120%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--bg-dark); /* Keeps photo distinct */
+}
+
+/* --- ANIMATIONS --- */
+@keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-40px); }
+    to { opacity: 1; transform: translateX(0); }
+}
+
+.tab-content { display: none; text-align: left; }
+.tab-content.active {
+    display: block;
+    animation: slideInLeft 0.5s ease-out forwards;
+}
+.home-center { text-align: center; }
+
+/* --- CARDS & GLOW --- */
+.card {
+    background: var(--card-bg);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: 0.3s ease;
+}
+
+.glow-card:hover {
+    border-color: var(--primary);
+    box-shadow: 0 0 20px rgba(0, 247, 255, 0.3);
+    transform: translateY(-3px);
+}
+
+.section-border {
+    border-left: 4px solid var(--primary);
+    padding-left: 15px;
+    margin-bottom: 25px;
+}
+
+.highlight-text {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* --- SKILLS PILLS --- */
+.pill-container { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 10px; }
+.pill {
+    background: var(--primary);
+    color: #000;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+/* --- Compact Contact Section --- */
+.contact-compact {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Spacing between the 4 lines */
+    padding: 30px;
+}
+
+.contact-line {
+    display: flex;
+    align-items: center;
+    font-size: 1.05rem;
+}
+
+/* Icon fixed width for alignment */
+.contact-line i {
+    width: 35px;
+    font-size: 1.2rem;
+    text-align: left;
+}
+
+.contact-line .label {
+    font-weight: 600;
+    color: #bbb;
+    margin-right: 10px;
+    min-width: 80px; /* Aligns the values vertically */
+}
+
+.contact-line .value {
+    text-decoration: none;
+    transition: 0.3s ease;
+}
+
+/* Hover effect for the whole card */
+.contact-compact.glow-card:hover {
+    border-color: var(--primary);
+    box-shadow: 0 0 25px rgba(0, 247, 255, 0.35);
+}
+
+/* Skyblue highlight for links */
+.contact-line a.highlight-text:hover {
+    color: #fff;
+    text-shadow: 0 0 8px var(--primary);
+}
+/* --- NAVBAR --- */
+.navbar {
+    position: sticky;
+    top: 0;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(10px);
+    padding: 15px 0;
+    z-index: 1000;
+}
+.nav-container { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+.nav-link { color: #aaa; cursor: pointer; text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
+.nav-link.active, .nav-link:hover { color: var(--primary); opacity: 1; }
+
+.container { max-width: 850px; margin: auto; padding: 20px; }
